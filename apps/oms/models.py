@@ -42,8 +42,8 @@ class SkuList(models.Model):
     sku_usd_settlement = models.FloatField(verbose_name='支付宝最终入账', max_length=100, null=True, blank=True)
     order_cost_price = models.CharField(verbose_name='订单成本价', max_length=100, null=True, blank=True)
     korean_rate = models.FloatField(verbose_name='rate2', max_length=100, null=True, blank=True)
-    sku_krw_settlement = models.IntegerField(verbose_name='최종 입금 금액 KRW', max_length=100, null=True, blank=True)
-    sku_krw_net_income = models.IntegerField(verbose_name='수익 KRW', max_length=100, null=True, blank=True)
+    sku_krw_settlement = models.IntegerField(verbose_name='최종 입금 금액 KRW',  null=True, blank=True)
+    sku_krw_net_income = models.IntegerField(verbose_name='수익 KRW',  null=True, blank=True)
 
     class Meta:
         managed = True
@@ -51,4 +51,4 @@ class SkuList(models.Model):
         db_table = 'tmalloms'
 
     def __str__(self):
-        return '%s' %(self.tm_order_id)
+        return '%s' %(self.name)

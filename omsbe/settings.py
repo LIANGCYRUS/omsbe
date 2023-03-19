@@ -15,8 +15,7 @@ import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.append(os.path.join(BASE_DIR,'apps'))
-
+sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -29,8 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
+    'drf_yasg',
     'apps.oms',
 ]
 
@@ -74,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'omsbe.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -82,13 +82,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tmalloms',
-        'USER':'root',
-        'PASSWORD':'123123',
-        'HOST':'02340234.c.methodot.com',
-        'PORT':33841
+        'USER': 'root',
+        'PASSWORD': '123123',
+        'HOST': '02340234.c.methodot.com',
+        'PORT': 33841
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -108,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -120,7 +118,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -130,3 +127,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ********** 全局设置 REST FRAME **********
+REST_FRAMEWORK = {
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter'
+    ],
+
+    # 全局自定义分页设置
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20  # 固定20行一页
+}
